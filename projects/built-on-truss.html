@@ -56,14 +56,14 @@
     </div>
 
     <h2>The built prototype</h2>
-    <div class="gallery">
+    <div class="gallery two">
       <figure><img src="built-on-truss/build-dispensing.jpg" alt="Pipette dispensing into a cup on the turntable"><figcaption>Pipette dispensing into an indexed cup</figcaption></figure>
       <figure><img src="built-on-truss/build-full-system.jpg" alt="Full system top view"><figcaption>Full system — top view</figcaption></figure>
     </div>
     <p>The completed system: a laser-cut turntable driven by a laser-cut spur gear and stepper motor, with the pipette arm dispensing into cups indexed on the rotating base. Fully automated — no manual intervention during the sampling cycle.</p>
 
     <h2>My subsystem — the rotating base</h2>
-    <div class="gallery">
+    <div class="gallery two">
       <figure><img src="built-on-truss/build-gear-train.jpg" alt="Gear train and stepper motor"><figcaption>Gear train + stepper drive</figcaption></figure>
       <figure><img src="built-on-truss/rotating-base.jpg" alt="Rotating base CAD render"><figcaption>Rotating base — CAD render</figcaption></figure>
     </div>
@@ -91,5 +91,27 @@
 </section>
 
 <footer><div class="foot-inner"><span>Ella Kapanga · Mechanical Engineering</span><span><a href="../index.html">← Home</a></span></div></footer>
+
+<!-- lightbox -->
+<div class="lb" id="lb" onclick="closeLb()">
+  <span class="lb-close" onclick="closeLb()">✕</span>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),img=document.getElementById('lb-img'),cap=document.getElementById('lb-cap');
+  document.querySelectorAll('.gallery figure img').forEach(function(t){
+    t.parentElement.addEventListener('click',function(){
+      img.src=t.src; img.alt=t.alt||'';
+      var fc=t.parentElement.querySelector('figcaption');
+      cap.textContent=fc?fc.textContent:'';
+      lb.classList.add('open'); document.body.style.overflow='hidden';
+    });
+  });
+  window.closeLb=function(){lb.classList.remove('open'); document.body.style.overflow='';};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')window.closeLb();});
+})();
+</script>
 </body>
 </html>
